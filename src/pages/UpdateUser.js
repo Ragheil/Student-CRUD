@@ -143,6 +143,7 @@ const ViewAllUser = () => {
              placeholder="Enter Student Contact Number"
              value={selectedUserContact.toString()}
              style={styles.textInput}
+             keyboardType="numeric"
              onChangeText={(contact) => setSelectedUserContact(contact)}
              />
             <Text style={styles.textheader}>Address</Text>
@@ -151,7 +152,7 @@ const ViewAllUser = () => {
               value={selectedUserAddress}
               style={styles.textInput}
               onChangeText={(address) => setSelectedUserAddress(address)}
-            />
+            />  
             <TouchableOpacity
               style={styles.updateButton}
               onPress={updateStudent}
