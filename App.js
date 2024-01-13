@@ -20,7 +20,7 @@ const App = () => {
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            title: 'Student Registration',
+            title: 'Store Registration',
             headerStyle: {
               backgroundColor: '#00AD98',
             },
@@ -34,7 +34,7 @@ const App = () => {
           name="Register"
           component={RegisterUser}
           options={{
-            title: 'Register Student',
+            title: 'Register Store',
             headerStyle: {
               backgroundColor: '#2992C4',
             },
@@ -48,7 +48,7 @@ const App = () => {
           name="Update"
           component={UpdateUser}
           options={{
-            title: 'Update Student Data',
+            title: 'Update Store Data',
             headerStyle: {
               backgroundColor: '#A45BB9',
             },
@@ -63,7 +63,7 @@ const App = () => {
           name="ViewAll"
           component={ViewAllUser}
           options={{
-            title: 'View All Students',
+            title: 'View All Stores',
             headerStyle: {
               backgroundColor: '#384F62',
             },
@@ -77,7 +77,7 @@ const App = () => {
           name="Delete"
           component={DeleteUser}
           options={{
-            title: 'Delete a Student',
+            title: 'Delete a Store',
             headerStyle: {
               backgroundColor: '#D1503A',
             },

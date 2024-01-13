@@ -9,10 +9,10 @@ const ViewAllUser = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchStudentData();
+    fetchStoreData();
   }, [searchTerm]);
 
-  const fetchStudentData = () => {
+  const fetchStoreData = () => {
     db.transaction((tx) => {
       const query = searchTerm
         ? 'SELECT * FROM table_user WHERE user_id LIKE ? OR user_name LIKE ?'
@@ -33,16 +33,16 @@ const ViewAllUser = () => {
       <View
         key={item.user_id}
         style={{ backgroundColor: '#EEE', marginTop: 20, padding: 30, borderRadius: 10 }}>
-        <Text style={styles.textheader}>Student ID</Text>
+        <Text style={styles.textheader}>Store ID</Text>
         <Text style={styles.textbottom}>{item.user_id}</Text>
 
-        <Text style={styles.textheader}>Student Name</Text>
+        <Text style={styles.textheader}>Store Name</Text>
         <Text style={styles.textbottom}>{item.user_name}</Text>
 
-        <Text style={styles.textheader}>Student Contact Number</Text>
+        <Text style={styles.textheader}>Contact Person</Text>
         <Text style={styles.textbottom}>{item.user_contact}</Text>
 
-        <Text style={styles.textheader}>Student Address</Text>
+        <Text style={styles.textheader}>Location</Text>
         <Text style={styles.textbottom}>{item.user_address}</Text>
       </View>
     );
@@ -53,7 +53,7 @@ const ViewAllUser = () => {
       <View style={{ flex: 1, backgroundColor: 'white', padding: 20 }}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search by Student ID or Name"
+          placeholder="Search by Store ID or Name"
           onChangeText={(term) => setSearchTerm(term)}
         />
         <FlatList

@@ -7,6 +7,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { DatabaseConnection } from '../database/database-connection';
 
@@ -58,17 +60,18 @@ const ViewAllUser = () => {
             padding: 30,
             borderRadius: 10,
           }}
-        ><Text style={styles.editTextHeader}>Information</Text>
-          <Text style={styles.textheader}>Student ID</Text>
+        >
+          <Text style={styles.editTextHeader}>Information</Text>
+          <Text style={styles.textheader}>Store ID</Text>
           <Text style={styles.textbottom}>{item.user_id}</Text>
 
-          <Text style={styles.textheader}>Student Name</Text>
+          <Text style={styles.textheader}>Store Name</Text>
           <Text style={styles.textbottom}>{item.user_name}</Text>
 
-          <Text style={styles.textheader}>Student Contact Number</Text>
+          <Text style={styles.textheader}>Store Contact Number</Text>
           <Text style={styles.textbottom}>{item.user_contact}</Text>
 
-          <Text style={styles.textheader}>Student Address</Text>
+          <Text style={styles.textheader}>Store Address</Text>
           <Text style={styles.textbottom}>{item.user_address}</Text>
         </View>
       </TouchableOpacity>
@@ -111,14 +114,15 @@ const ViewAllUser = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-      <Text style={styles.editHeader}>Tap the Information Section for you to Edit</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.content}
+      >
+        <Text style={styles.editHeader}>Tap the Information Section for you to Edit</Text>
         <TextInput
-        
           style={styles.searchInput}
           placeholder="Search by Student ID or Name"
           onChangeText={(term) => setSearchTerm(term)}
-          
         />
         <FlatList
           contentContainerStyle={{ paddingHorizontal: 20 }}
@@ -130,8 +134,8 @@ const ViewAllUser = () => {
         {/* Edit Section */}
         {selectedUserId ? (
           <View style={styles.editSection}>
-            <Text style={styles.editHeader}>Edit Student</Text>
-            <Text style={styles.textheader}>Student Name</Text>
+            <Text style={styles.editHeader}>Edit Store Information</Text>
+            <Text style={styles.textheader}>Store Name</Text>
             <TextInput
               placeholder="Enter Student Name"
               value={selectedUserName}
@@ -140,34 +144,27 @@ const ViewAllUser = () => {
             />
             <Text style={styles.textheader}>Contact Number</Text>
             <TextInput
-             placeholder="Enter Student Contact Number"
-             value={selectedUserContact.toString()}
-             style={styles.textInput}
-             keyboardType="numeric"
-             onChangeText={(contact) => setSelectedUserContact(contact)}
-             />
+              placeholder="Enter Student Contact Number"
+              value={selectedUserContact.toString()}
+              style={styles.textInput}
+              onChangeText={(contact) => setSelectedUserContact(contact)}
+            />
             <Text style={styles.textheader}>Address</Text>
             <TextInput
               placeholder="Enter Student Address"
               value={selectedUserAddress}
               style={styles.textInput}
               onChangeText={(address) => setSelectedUserAddress(address)}
-            />  
-            <TouchableOpacity
-              style={styles.updateButton}
-              onPress={updateStudent}
-            >
+            />
+            <TouchableOpacity style={styles.updateButton} onPress={updateStudent}>
               <Text style={styles.buttonText}>Update Student</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={cancelEdit}
-            >
+            <TouchableOpacity style={styles.cancelButton} onPress={cancelEdit}>
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
           </View>
         ) : null}
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -218,6 +215,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
     paddingBottom: 10,
+    color: 'blue',
   },
   textInput: {
     height: 40,
@@ -244,7 +242,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-
 });
 
 export default ViewAllUser;

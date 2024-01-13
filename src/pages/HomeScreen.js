@@ -5,6 +5,8 @@ import { DatabaseConnection } from '../database/database-connection';
 
 const db = DatabaseConnection.getConnection();
 
+
+
 const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     db.transaction(function (txn) {
@@ -13,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
         [],
         function (tx, res) {
           console.log('item:', res.rows.length);
-          if (res.rows.length == 0) {
+          if (res.rows.length === 0) {
             txn.executeSql('DROP TABLE IF EXISTS table_user', []);
             txn.executeSql(
               'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_contact INT(10), user_address VARCHAR(255))',
@@ -32,27 +34,27 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ flex: 1 }}>
 
             <MyImageButton
-              title="Register Student"
+              title="Register Store"
               btnColor='#2992C4'
               btnIcon="user-plus"
               customClick={() => navigation.navigate('Register')}
             />
 
             <MyImageButton
-              title="Update Student Record"
+              title="Update Store Record"
               btnColor='#A45BB9'
               btnIcon="user-circle"
               customClick={() => navigation.navigate('Update')}
             />
 
             <MyImageButton
-              title="View All Students"
+              title="View All Stores"
               btnColor='#384F62'
               btnIcon="users"
               customClick={() => navigation.navigate('ViewAll')}
             />
             <MyImageButton
-              title="Delete a Student"
+              title="Delete a Store"
               btnColor='#D1503A'
               btnIcon="user-times"
               customClick={() => navigation.navigate('Delete')}

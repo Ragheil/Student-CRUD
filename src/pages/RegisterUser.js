@@ -12,42 +12,44 @@ import { DatabaseConnection } from '../database/database-connection';
 
 const db = DatabaseConnection.getConnection();
 
+
+
 const RegisterUser = ({ navigation }) => {
-  let [user_id, setUserID] = useState('');
-  let [userName, setUserName] = useState('');
-  let [userContact, setUserContact] = useState('');
-  let [userAddress, setUserAddress] = useState('');
+  let [storeID, setStoreID] = useState('');
+  let [storeName, setStoreName] = useState('');
+  let [contactPerson, setContactPerson] = useState('');
+  let [location, setLocation] = useState('');
 
-  let register_user = () => {
-    console.log(user_id, userName, userContact, userAddress);
+  let register_store = () => {
+    console.log(storeID, storeName, contactPerson, location);
 
-    if (!user_id) {
-      alert('Please fill in the Student ID!');
+    if (!storeID) {
+      alert('Please fill in the Store ID!');
       return;
     }
-    if (!userName) {
-      alert('Please fill in the name!');
+    if (!storeName) {
+      alert('Please fill in the Store Name!');
       return;
     }
-    if (!userContact) {
-      alert('Please fill in the contact');
+    if (!contactPerson) {
+      alert('Please fill in the Contact Person');
       return;
     }
-    if (!userAddress) {
-      alert('Please fill in the address!');
+    if (!location) {
+      alert('Please fill in the Location!');
       return;
     }
 
     db.transaction(function (tx) {
       tx.executeSql(
         'INSERT INTO table_user (user_id, user_name, user_contact, user_address) VALUES (?,?,?,?)',
-        [user_id, userName, userContact, userAddress],
+        [storeID, storeName, contactPerson, location],
         (tx, results) => {
           console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
               'Success',
-              'Successfully Registered Student !!!',
+              'Successfully Registered Store !!!',
               [
                 {
                   text: 'Ok',
@@ -56,7 +58,7 @@ const RegisterUser = ({ navigation }) => {
               ],
               { cancelable: false }
             );
-          } else alert('Error trying to register Student !!!');
+          } else alert('Error trying to register Store !!!');
         }
       );
     });
@@ -71,32 +73,27 @@ const RegisterUser = ({ navigation }) => {
               behavior="padding"
               style={{ flex: 1, justifyContent: 'space-between' }}>
               <Mytextinput
-                placeholder="Enter Student ID"
-                onChangeText={(user_id) => setUserID(user_id)}
+                placeholder="Enter Store ID"
+                onChangeText={(storeID) => setStoreID(storeID)}
                 keyboardType="numeric"
                 style={{ padding: 10 }}
               />
               <Mytextinput
-                placeholder="Enter Student Name"
-                onChangeText={(userName) => setUserName(userName)}
+                placeholder="Enter Store Name"
+                onChangeText={(storeName) => setStoreName(storeName)}
                 style={{ padding: 10 }}
               />
               <Mytextinput
-                placeholder="Enter Student Telephone Number"
-                onChangeText={(userContact) => setUserContact(userContact)}
-                maxLength={11}
-                keyboardType="numeric"
+                placeholder="Enter Contact Person"
+                onChangeText={(contactPerson) => setContactPerson(contactPerson)}
                 style={{ padding: 10 }}
               />
               <Mytextinput
-                placeholder="Enter Student Address"
-                onChangeText={(userAddress) => setUserAddress(userAddress)}
-                maxLength={225}
-                numberOfLines={5}
-                multiline={true}
-                style={{ textAlignVertical: 'top', padding: 10 }}
+                placeholder="Enter Location"
+                onChangeText={(location) => setLocation(location)}
+                style={{ padding: 10 }}
               />
-              <Mybutton title="Save" customClick={register_user} />
+              <Mybutton title="Register Store" customClick={register_store} />
             </KeyboardAvoidingView>
           </ScrollView>
         </View>
